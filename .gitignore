@@ -1,0 +1,25 @@
+# Visual Studio 构建产物
+.vs/
+x64/
+Debug/
+Release/
+
+*.exe
+*.obj
+*.ilk
+*.pdb
+*.idb
+*.tlog
+*.log
+*.recipe
+*.lastbuildstate
+
+# 用户 / IDE 本地配置
+*.vcxproj.user
+*.suo
+.vscode/
+
+# 其他
+*.tmp
+Thumbs.db
+.DS_Store
