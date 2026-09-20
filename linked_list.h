@@ -2,18 +2,18 @@
 
 #include "linear_list.h"
 
-/* µ¥Á´±í½áµã */
+/* å•é“¾è¡¨ç»“ç‚¹ */
 typedef struct Node {
     Student data;
     struct Node* next;
 } Node;
 
-/* ´øÍ·½áµã£¨ÑÆ½áµã£©µÄµ¥Á´±í¡£
-   ÑÆ½áµãµÄ×÷ÓÃ£ºÈÃ"ÔÚ 0 ºÅÎ»ÖÃ²åÈë/É¾³ı"ºÍÖĞ¼äÎ»ÖÃµÄ´¦Àí·½Ê½ÍêÈ«Ò»ÖÂ¡£ */
+/* å¸¦å¤´ç»“ç‚¹ï¼ˆå“‘ç»“ç‚¹ï¼‰çš„å•é“¾è¡¨ã€‚
+   å“‘ç»“ç‚¹çš„ä½œç”¨ï¼šè®©"åœ¨ 0 å·ä½ç½®æ’å…¥/åˆ é™¤"å’Œä¸­é—´ä½ç½®çš„å¤„ç†æ–¹å¼å®Œå…¨ä¸€è‡´ã€‚ */
 typedef struct {
-    Node* head;  /* ÑÆÍ·½áµã£¬Ê¼ÖÕ´æÔÚ */
-    Node* tail;  /* Î²Ö¸Õë£¬Ê¹½¨±í£¨Î²²å£©ÕûÌå±£³Ö O(n) */
-    int size;    /* µ±Ç°ÔªËØ¸öÊı */
+    Node* head;  /* å“‘å¤´ç»“ç‚¹ï¼Œå§‹ç»ˆå­˜åœ¨ */
+    Node* tail;  /* å°¾æŒ‡é’ˆï¼Œä½¿å»ºè¡¨ï¼ˆå°¾æ’ï¼‰æ•´ä½“ä¿æŒ O(n) */
+    int size;    /* å½“å‰å…ƒç´ ä¸ªæ•° */
 } LinkedList;
 
 void linked_init(LinkedList* list);
@@ -24,5 +24,5 @@ int  linked_insert_at(LinkedList* list, int pos, const Student* stu);
 int  linked_remove_at(LinkedList* list, int pos);
 int  linked_size(const LinkedList* list);
 
-/* ·µ»ØÁ´±íµÄÍ³Ò»²Ù×÷±í */
+/* è¿”å›é“¾è¡¨çš„ç»Ÿä¸€æ“ä½œè¡¨ */
 const ListOps* linked_list_ops(void);

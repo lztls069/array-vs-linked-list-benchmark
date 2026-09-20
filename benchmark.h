@@ -3,17 +3,17 @@
 #include "linear_list.h"
 #include "student.h"
 
-/* Ò»ÖÖ´æ´¢½á¹¹ÔÚÄ³Ò»Êı¾İ¹æÄ£ÏÂµÄ²âÊÔ½á¹û£¬Ê±¼äµ¥Î»Í³Ò»ÎªÎ¢Ãë(us) */
+/* ä¸€ç§å­˜å‚¨ç»“æ„åœ¨æŸä¸€æ•°æ®è§„æ¨¡ä¸‹çš„æµ‹è¯•ç»“æœï¼Œæ—¶é—´å•ä½ç»Ÿä¸€ä¸ºå¾®ç§’(us) */
 typedef struct {
-    double createUs;     /* ½¨±í×ÜºÄÊ± */
-    double queryAvgUs;   /* µ¥´Î²éÑ¯Æ½¾ùºÄÊ± */
-    double insertAvgUs;  /* µ¥´Î²åÈëÆ½¾ùºÄÊ± */
-    double deleteAvgUs;  /* µ¥´ÎÉ¾³ıÆ½¾ùºÄÊ± */
+    double createUs;     /* å»ºè¡¨æ€»è€—æ—¶ */
+    double queryAvgUs;   /* å•æ¬¡æŸ¥è¯¢å¹³å‡è€—æ—¶ */
+    double insertAvgUs;  /* å•æ¬¡æ’å…¥å¹³å‡è€—æ—¶ */
+    double deleteAvgUs;  /* å•æ¬¡åˆ é™¤å¹³å‡è€—æ—¶ */
 } BenchResult;
 
-/* ÔÚ¸ø¶¨Êı¾İ¼¯ÉÏ²âÊÔÒ»ÖÖÏßĞÔ±í£º½¨±í -> ²éÑ¯ -> ²åÈë -> É¾³ı£¬·Ö±ğ¼ÆÊ±¡£
-   list ÊÇ¾ßÌå½á¹¹µÄ¶ÔÏóÖ¸Õë£¨SeqList* / LinkedList*£©£¬
-   ops ÊÇËü¶ÔÓ¦µÄ²Ù×÷±í£¬¶şÕß±ØĞëÆ¥Åä¡£ */
+/* åœ¨ç»™å®šæ•°æ®é›†ä¸Šæµ‹è¯•ä¸€ç§çº¿æ€§è¡¨ï¼šå»ºè¡¨ -> æŸ¥è¯¢ -> æ’å…¥ -> åˆ é™¤ï¼Œåˆ†åˆ«è®¡æ—¶ã€‚
+   list æ˜¯å…·ä½“ç»“æ„çš„å¯¹è±¡æŒ‡é’ˆï¼ˆSeqList* / LinkedList*ï¼‰ï¼Œ
+   ops æ˜¯å®ƒå¯¹åº”çš„æ“ä½œè¡¨ï¼ŒäºŒè€…å¿…é¡»åŒ¹é…ã€‚ */
 void run_benchmark(const ListOps* ops, void* list,
     const Student* data, int n,
     int queryCount, int insertCount, int deleteCount,

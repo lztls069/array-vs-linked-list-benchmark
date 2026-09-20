@@ -4,8 +4,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-/* ·µ»ØµÚ index ¸öÊı¾İ½áµã£»index Îª -1 Ê±·µ»ØÑÆÍ·½áµã¡£
-   µ÷ÓÃÕßĞè±£Ö¤ index ÔÚ [-1, size-1] ·¶Î§ÄÚ¡£ */
+/* è¿”å›ç¬¬ index ä¸ªæ•°æ®ç»“ç‚¹ï¼›index ä¸º -1 æ—¶è¿”å›å“‘å¤´ç»“ç‚¹ã€‚
+   è°ƒç”¨è€…éœ€ä¿è¯ index åœ¨ [-1, size-1] èŒƒå›´å†…ã€‚ */
 static Node* linked_node_at(LinkedList* list, int index) {
     Node* cur = list->head;
     int i;
@@ -15,7 +15,7 @@ static Node* linked_node_at(LinkedList* list, int index) {
     return cur;
 }
 
-/* ÊÍ·Å³ıÑÆÍ·½áµãÍâµÄËùÓĞ½áµã£¬²¢°Ñ±íÇå¿Õ */
+/* é‡Šæ”¾é™¤å“‘å¤´ç»“ç‚¹å¤–çš„æ‰€æœ‰ç»“ç‚¹ï¼Œå¹¶æŠŠè¡¨æ¸…ç©º */
 static void linked_clear(LinkedList* list) {
     Node* cur = list->head->next;
     while (cur != NULL) {
@@ -52,7 +52,7 @@ void linked_destroy(LinkedList* list) {
 void linked_build(LinkedList* list, const Student* data, int n) {
     int i;
     linked_clear(list);
-    /* Î²²å½¨±í£ºÃ¿¸ö½áµãÒ»´Î malloc£¬ÅäºÏÎ²Ö¸ÕëÕûÌåÎª O(n) */
+    /* å°¾æ’å»ºè¡¨ï¼šæ¯ä¸ªç»“ç‚¹ä¸€æ¬¡ mallocï¼Œé…åˆå°¾æŒ‡é’ˆæ•´ä½“ä¸º O(n) */
     for (i = 0; i < n; ++i) {
         Node* node = (Node*)malloc(sizeof(Node));
         if (node == NULL) {
@@ -88,7 +88,7 @@ int linked_insert_at(LinkedList* list, int pos, const Student* stu) {
         return 0;
     }
 
-    /* pos == 0 Ê± linked_node_at(-1) ·µ»ØÑÆÍ·½áµã£¬²»ĞèÒªµ¥¶À´¦Àí±íÍ· */
+    /* pos == 0 æ—¶ linked_node_at(-1) è¿”å›å“‘å¤´ç»“ç‚¹ï¼Œä¸éœ€è¦å•ç‹¬å¤„ç†è¡¨å¤´ */
     prev = linked_node_at(list, pos - 1);
     node = (Node*)malloc(sizeof(Node));
     if (node == NULL) {
@@ -99,7 +99,7 @@ int linked_insert_at(LinkedList* list, int pos, const Student* stu) {
     node->next = prev->next;
     prev->next = node;
 
-    if (node->next == NULL) {  /* ĞÂ½áµã¹ÒÔÚ±íÎ²£¬¸üĞÂÎ²Ö¸Õë */
+    if (node->next == NULL) {  /* æ–°ç»“ç‚¹æŒ‚åœ¨è¡¨å°¾ï¼Œæ›´æ–°å°¾æŒ‡é’ˆ */
         list->tail = node;
     }
     ++list->size;
@@ -118,7 +118,7 @@ int linked_remove_at(LinkedList* list, int pos) {
     target = prev->next;
     prev->next = target->next;
 
-    if (target == list->tail) {  /* É¾µôµÄÊÇÎ²½áµã£¬Î²Ö¸Õë»ØÍË */
+    if (target == list->tail) {  /* åˆ æ‰çš„æ˜¯å°¾ç»“ç‚¹ï¼Œå°¾æŒ‡é’ˆå›é€€ */
         list->tail = prev;
     }
     free(target);
@@ -130,7 +130,7 @@ int linked_size(const LinkedList* list) {
     return list->size;
 }
 
-/* ---- Í³Ò»½Ó¿ÚÊÊÅä²ã£º°Ñ¾ßÌåº¯Êı×°½øº¯ÊıÖ¸Õë±í ---- */
+/* ---- ç»Ÿä¸€æ¥å£é€‚é…å±‚ï¼šæŠŠå…·ä½“å‡½æ•°è£…è¿›å‡½æ•°æŒ‡é’ˆè¡¨ ---- */
 
 static void linked_ops_build(void* self, const Student* data, int n) {
     linked_build((LinkedList*)self, data, n);

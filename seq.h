@@ -1,11 +1,11 @@
 #pragma once
 #include "student.h"
 #include "linear_list.h"
-/* Ë³Ğò±í£¨Êı×é´æ´¢½á¹¹£©£ºµ×²ãÎª¶¯Ì¬Êı×é£¬ÈİÁ¿²»×ãÊ±°´ 2 ±¶À©Èİ */
+/* é¡ºåºè¡¨ï¼ˆæ•°ç»„å­˜å‚¨ç»“æ„ï¼‰ï¼šåº•å±‚ä¸ºåŠ¨æ€æ•°ç»„ï¼Œå®¹é‡ä¸è¶³æ—¶æŒ‰ 2 å€æ‰©å®¹ */
 typedef struct {
-    Student* data;  /* ¶¯Ì¬Êı×é */
-    int size;       /* µ±Ç°ÔªËØ¸öÊı */
-    int capacity;   /* µ±Ç°ÈİÁ¿ */
+    Student* data;  /* åŠ¨æ€æ•°ç»„ */
+    int size;       /* å½“å‰å…ƒç´ ä¸ªæ•° */
+    int capacity;   /* å½“å‰å®¹é‡ */
 } SeqList;
 
 void seq_init(SeqList* list);
@@ -16,5 +16,5 @@ int  seq_insert_at(SeqList* list, int pos, const Student* stu);
 int  seq_remove_at(SeqList* list, int pos);
 int  seq_size(const SeqList* list);
 
-/* ·µ»ØË³Ğò±íµÄÍ³Ò»²Ù×÷±í */
+/* è¿”å›é¡ºåºè¡¨çš„ç»Ÿä¸€æ“ä½œè¡¨ */
 const ListOps* seq_list_ops(void);

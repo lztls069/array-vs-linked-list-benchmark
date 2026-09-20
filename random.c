@@ -3,19 +3,19 @@
 static unsigned int g_state = 1u;
 
 void rng_seed(unsigned int seed) {
-    g_state = (seed == 0u) ? 1u : seed;  /* xorshift µÄ×´Ì¬²»ÄÜÎª 0 */
+    g_state = (seed == 0u) ? 1u : seed;  /* xorshift çš„çŠ¶æ€ä¸èƒ½ä¸º 0 */
 }
 
 unsigned int rng_next(void) {
     unsigned int x = g_state;
-    x ^= x << 13;//×óÒÆ13Î»ºó°´Î»Òì»ò
+    x ^= x << 13;//å·¦ç§»13ä½åæŒ‰ä½å¼‚æˆ–
     x ^= x >> 17;
     x ^= x << 5;
     g_state = x;
     return x;
-}//ÉèÖÃÏÂ¸öÖÖ×Ó
+}//è®¾ç½®ä¸‹ä¸ªç§å­
 
 int rng_range(int lo, int hi) {
-    unsigned int span = (unsigned int)(hi - lo + 1);//·¶Î§£º£¨15£¬ 0-25£©
+    unsigned int span = (unsigned int)(hi - lo + 1);//èŒƒå›´ï¼šï¼ˆ15ï¼Œ 0-25ï¼‰
     return lo + (int)(rng_next() % span);
 }

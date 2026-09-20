@@ -9,7 +9,7 @@ void generate_students(Student* out, int n, unsigned int seed) {
 	char buffer[NAME_MAX];
 	rng_seed(seed);
     for (i = 0; i < n; i++) {
-        // 4 ¸öËæ»úĞ¡Ğ´×ÖÄ¸ + 6 Î»ĞòºÅ
+        // 4 ä¸ªéšæœºå°å†™å­—æ¯ + 6 ä½åºå·
         snprintf(buffer, sizeof(buffer), "%c%c%c%c%06d",
             kLetters[rng_range(0, 25)],
             kLetters[rng_range(0, 25)],

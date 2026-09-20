@@ -1,16 +1,16 @@
 #pragma once
 #include "student.h"
 
-/* ÏßĞÔ±íÍ³Ò»²Ù×÷½Ó¿Ú¡£
-   C ÓïÑÔÃ»ÓĞĞéº¯Êı£¬ÕâÀïÓÃ"º¯ÊıÖ¸Õë±í"´ïµ½Í¬ÑùĞ§¹û£º
-   Ë³Ğò±íºÍÁ´±í¸÷×ÔÌá¹©Ò»ÕÅ±í£¬²âÊÔÄ£¿éÖ»Í¨¹ıÕâÕÅ±íµ÷ÓÃ£¬
-   Òò´ËÁ½ÖÖ´æ´¢½á¹¹±»²âµÄ²Ù×÷ĞòÁĞÍêÈ«ÏàÍ¬¡£
-   £¨·µ»Ø 1 ±íÊ¾³É¹¦£¬0 ±íÊ¾Î»ÖÃÔ½½çÊ§°Ü¡££© */
+/* çº¿æ€§è¡¨ç»Ÿä¸€æ“ä½œæ¥å£ã€‚
+   C è¯­è¨€æ²¡æœ‰è™šå‡½æ•°ï¼Œè¿™é‡Œç”¨"å‡½æ•°æŒ‡é’ˆè¡¨"è¾¾åˆ°åŒæ ·æ•ˆæœï¼š
+   é¡ºåºè¡¨å’Œé“¾è¡¨å„è‡ªæä¾›ä¸€å¼ è¡¨ï¼Œæµ‹è¯•æ¨¡å—åªé€šè¿‡è¿™å¼ è¡¨è°ƒç”¨ï¼Œ
+   å› æ­¤ä¸¤ç§å­˜å‚¨ç»“æ„è¢«æµ‹çš„æ“ä½œåºåˆ—å®Œå…¨ç›¸åŒã€‚
+   ï¼ˆè¿”å› 1 è¡¨ç¤ºæˆåŠŸï¼Œ0 è¡¨ç¤ºä½ç½®è¶Šç•Œå¤±è´¥ã€‚ï¼‰ */
 typedef struct {
-    void (*build)(void* self, const Student* data, int n);//½¨±í
-    int  (*find_by_name)(void* self, const char* name);//°´ĞÕÃû²é
-    int  (*insert_at)(void* self, int pos, const Student* stu); //ÔÚÖ¸¶¨Î»ÖÃ²åÈë
-    int  (*remove_at)(void* self, int pos);//É¾³ıÖ¸¶¨Î»ÖÃ
-    int  (*size)(void* self);//·µ»ØÔªËØ¸öÊı
-    void (*destroy)(void* self);//ÊÍ·ÅÄÚ´æ
+    void (*build)(void* self, const Student* data, int n);//å»ºè¡¨
+    int  (*find_by_name)(void* self, const char* name);//æŒ‰å§“åæŸ¥
+    int  (*insert_at)(void* self, int pos, const Student* stu); //åœ¨æŒ‡å®šä½ç½®æ’å…¥
+    int  (*remove_at)(void* self, int pos);//åˆ é™¤æŒ‡å®šä½ç½®
+    int  (*size)(void* self);//è¿”å›å…ƒç´ ä¸ªæ•°
+    void (*destroy)(void* self);//é‡Šæ”¾å†…å­˜
 } ListOps;

@@ -3,7 +3,7 @@
 
 
 typedef struct student {
-	char name[NAME_MAX];//4×ÖÄ¸
+	char name[NAME_MAX];//4å­—æ¯
 	int age;
 	int score;
 }Student;

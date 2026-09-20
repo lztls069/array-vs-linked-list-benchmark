@@ -8,12 +8,12 @@
 #include "seq.h"
 #include "student.h"
 
-/* Ã¿¸öÊı¾İ¹æÄ£ÏÂµÄ²âÊÔ²ÎÊı£º
-     scale       Êı¾İ¹æÄ£
-     queryCount  ²éÑ¯´ÎÊı£¨ÓÃÓÚ¼ÆËãÆ½¾ù²éÑ¯Ê±¼ä£©
-     insertCount ²åÈë´ÎÊı£¨ÓÃÓÚ¼ÆËãÆ½¾ù²åÈëÊ±¼ä£©
-     deleteCount É¾³ı´ÎÊı£¨ÓÃÓÚ¼ÆËãÆ½¾ùÉ¾³ıÊ±¼ä£©
-     rounds      ÖØ¸´ÂÖÊı£¬×îÖÕ½á¹ûÈ¡¶àÂÖÆ½¾ù */
+/* æ¯ä¸ªæ•°æ®è§„æ¨¡ä¸‹çš„æµ‹è¯•å‚æ•°ï¼š
+     scale       æ•°æ®è§„æ¨¡
+     queryCount  æŸ¥è¯¢æ¬¡æ•°ï¼ˆç”¨äºè®¡ç®—å¹³å‡æŸ¥è¯¢æ—¶é—´ï¼‰
+     insertCount æ’å…¥æ¬¡æ•°ï¼ˆç”¨äºè®¡ç®—å¹³å‡æ’å…¥æ—¶é—´ï¼‰
+     deleteCount åˆ é™¤æ¬¡æ•°ï¼ˆç”¨äºè®¡ç®—å¹³å‡åˆ é™¤æ—¶é—´ï¼‰
+     rounds      é‡å¤è½®æ•°ï¼Œæœ€ç»ˆç»“æœå–å¤šè½®å¹³å‡ */
 typedef struct {
     int scale;
     int queryCount;
@@ -30,7 +30,7 @@ static const ScaleConfig kConfigs[] = {
     {1000000,     10,  20,  20, 1}
 };
 
-/* Ò»ÖÖ½á¹¹ÔÚÄ³Ò»¹æÄ£ÏÂµÄÆ½¾ù½á¹û */
+/* ä¸€ç§ç»“æ„åœ¨æŸä¸€è§„æ¨¡ä¸‹çš„å¹³å‡ç»“æœ */
 typedef struct {
     double createUs;
     double queryAvgUs;
@@ -38,7 +38,7 @@ typedef struct {
     double deleteAvgUs;
 } AvgResult;
 
-/* ¶ÔÒ»ÖÖ½á¹¹ÖØ¸´Èô¸ÉÂÖ²âÊÔ²¢È¡Æ½¾ù */
+/* å¯¹ä¸€ç§ç»“æ„é‡å¤è‹¥å¹²è½®æµ‹è¯•å¹¶å–å¹³å‡ */
 static AvgResult measure(const ListOps* ops, void* list, const Student* data,
     const ScaleConfig* cfg, unsigned int baseSeed) {
     AvgResult avg;
@@ -94,7 +94,7 @@ int main(void) {
 
         fprintf(stderr, "[progress] scale = %d ...\n", cfg->scale);
 
-        /* Í¬Ò»¹æÄ£Ö»Éú³ÉÒ»·İÊı¾İ£¬Êı×éºÍÁ´±í¹²ÓÃ£¬±£Ö¤ÊäÈëÍêÈ«Ò»ÖÂ */
+        /* åŒä¸€è§„æ¨¡åªç”Ÿæˆä¸€ä»½æ•°æ®ï¼Œæ•°ç»„å’Œé“¾è¡¨å…±ç”¨ï¼Œä¿è¯è¾“å…¥å®Œå…¨ä¸€è‡´ */
         data = (Student*)malloc(sizeof(Student) * (size_t)cfg->scale);
         if (data == NULL) {
             fprintf(stderr, "ERROR: out of memory\n");
@@ -102,7 +102,7 @@ int main(void) {
         }
         generate_students(data, cfg->scale, 20240909u);
 
-        /* Á½ÖÖ½á¹¹Ê¹ÓÃÏàÍ¬ÖÖ×Ó£¬²Ù×÷ĞòÁĞÍêÈ«Ò»ÖÂ */
+        /* ä¸¤ç§ç»“æ„ä½¿ç”¨ç›¸åŒç§å­ï¼Œæ“ä½œåºåˆ—å®Œå…¨ä¸€è‡´ */
         seq_init(&seq);
         seqAvg = measure(seq_list_ops(), &seq, data, cfg, 1000u);
         seq_destroy(&seq);

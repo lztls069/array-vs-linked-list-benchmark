@@ -36,12 +36,12 @@ void run_benchmark(const ListOps* ops, void* list,
     int currentSize;
     double t0;
     double t1;
-    volatile double sink = 0.0;  /* »ã×Ü½á¹û£¬·ÀÖ¹±àÒëÆ÷°Ñ²âÊÔ´úÂëÓÅ»¯µô */
+    volatile double sink = 0.0;  /* æ±‡æ€»ç»“æœï¼Œé˜²æ­¢ç¼–è¯‘å™¨æŠŠæµ‹è¯•ä»£ç ä¼˜åŒ–æ‰ */
     Student stu;
 
     rng_seed(seed);
 
-    /* ---- µÚÒ»²½£ºÏÈ¹Ì¶¨ºÃÕû¸ö²Ù×÷ĞòÁĞ£¬Êı×éÓëÁ´±íÊ¹ÓÃÍêÈ«ÏàÍ¬µÄĞòÁĞ ---- */
+    /* ---- ç¬¬ä¸€æ­¥ï¼šå…ˆå›ºå®šå¥½æ•´ä¸ªæ“ä½œåºåˆ—ï¼Œæ•°ç»„ä¸é“¾è¡¨ä½¿ç”¨å®Œå…¨ç›¸åŒçš„åºåˆ— ---- */
 
     if (n > 0 && queryCount > 0) {
         queryIdx = (int*)malloc(sizeof(int) * (size_t)queryCount);
@@ -50,7 +50,7 @@ void run_benchmark(const ListOps* ops, void* list,
             exit(1);
         }
         for (i = 0; i < queryCount; ++i) {
-            queryIdx[i] = rng_range(0, n - 1);  /* ³éÈ¡Òª²éÑ¯µÄ¼ÇÂ¼ÏÂ±ê */
+            queryIdx[i] = rng_range(0, n - 1);  /* æŠ½å–è¦æŸ¥è¯¢çš„è®°å½•ä¸‹æ ‡ */
         }
     }
     else {
@@ -64,11 +64,11 @@ void run_benchmark(const ListOps* ops, void* list,
             exit(1);
         }
         for (k = 0; k < insertCount; ++k) {
-            insertPos[k] = rng_range(0, n + k);  /* µÚ k ´Î²åÈëÊ±±í³¤Îª n + k */
+            insertPos[k] = rng_range(0, n + k);  /* ç¬¬ k æ¬¡æ’å…¥æ—¶è¡¨é•¿ä¸º n + k */
         }
     }
 
-    /* ²åÈëÍê³Éºó±í³¤Îª n + insertCount£¬µÚ k ´ÎÉ¾³ıÊ±±í³¤Îª n + insertCount - k */
+    /* æ’å…¥å®Œæˆåè¡¨é•¿ä¸º n + insertCountï¼Œç¬¬ k æ¬¡åˆ é™¤æ—¶è¡¨é•¿ä¸º n + insertCount - k */
     sizeAfterInsert = n + insertCount;
     if (deleteCount > 0) {
         deletePos = (int*)malloc(sizeof(int) * (size_t)deleteCount);
@@ -82,13 +82,13 @@ void run_benchmark(const ListOps* ops, void* list,
         }
     }
 
-    /* ---- µÚ¶ş²½£º½¨±í¼ÆÊ± ---- */
+    /* ---- ç¬¬äºŒæ­¥ï¼šå»ºè¡¨è®¡æ—¶ ---- */
     t0 = now_seconds();
     ops->build(list, data, n);
     t1 = now_seconds();
     out->createUs = (t1 - t0) * 1e6;
 
-    /* ---- µÚÈı²½£º²éÑ¯¼ÆÊ±£¨°´ĞÕÃû²é£¬Çóµ¥´ÎÆ½¾ù£© ---- */
+    /* ---- ç¬¬ä¸‰æ­¥ï¼šæŸ¥è¯¢è®¡æ—¶ï¼ˆæŒ‰å§“åæŸ¥ï¼Œæ±‚å•æ¬¡å¹³å‡ï¼‰ ---- */
     t0 = now_seconds();
     for (i = 0; i < queryCount; ++i) {
         sink += (double)ops->find_by_name(list, data[queryIdx[i]].name);
@@ -96,7 +96,7 @@ void run_benchmark(const ListOps* ops, void* list,
     t1 = now_seconds();
     out->queryAvgUs = (queryCount > 0) ? (t1 - t0) * 1e6 / (double)queryCount : 0.0;
 
-    /* ---- µÚËÄ²½£º²åÈë¼ÆÊ±£¨Ëæ»úÎ»ÖÃ²åÈë£¬Çóµ¥´ÎÆ½¾ù£© ---- */
+    /* ---- ç¬¬å››æ­¥ï¼šæ’å…¥è®¡æ—¶ï¼ˆéšæœºä½ç½®æ’å…¥ï¼Œæ±‚å•æ¬¡å¹³å‡ï¼‰ ---- */
     t0 = now_seconds();
     for (i = 0; i < insertCount; ++i) {
         student_set(&stu, (i % 2 == 0) ? "test_insert_even" : "test_insert_odd", 20, 90);
@@ -107,7 +107,7 @@ void run_benchmark(const ListOps* ops, void* list,
     t1 = now_seconds();
     out->insertAvgUs = (insertCount > 0) ? (t1 - t0) * 1e6 / (double)insertCount : 0.0;
 
-    /* ---- µÚÎå²½£ºÉ¾³ı¼ÆÊ±£¨Ëæ»úÎ»ÖÃÉ¾³ı£¬Çóµ¥´ÎÆ½¾ù£© ---- */
+    /* ---- ç¬¬äº”æ­¥ï¼šåˆ é™¤è®¡æ—¶ï¼ˆéšæœºä½ç½®åˆ é™¤ï¼Œæ±‚å•æ¬¡å¹³å‡ï¼‰ ---- */
     t0 = now_seconds();
     for (i = 0; i < deleteCount; ++i) {
         if (!ops->remove_at(list, deletePos[i])) {

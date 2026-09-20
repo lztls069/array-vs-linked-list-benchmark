@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-/* ±£Ö¤ÈİÁ¿ÖÁÉÙÎª need£¬²»¹»Ê±°´ 2 ±¶À©Èİ²¢°áÒÆÒÑÓĞÔªËØ */
+/* ä¿è¯å®¹é‡è‡³å°‘ä¸º needï¼Œä¸å¤Ÿæ—¶æŒ‰ 2 å€æ‰©å®¹å¹¶æ¬ç§»å·²æœ‰å…ƒç´  */
 static void seq_ensure_capacity(SeqList* list, int need) {
     int newCapacity;
     Student* newData;
@@ -46,7 +46,7 @@ void seq_destroy(SeqList* list) {
 
 void seq_build(SeqList* list, const Student* data, int n) {
     int i;
-    seq_destroy(list);  /* ÏÈÇå¿Õ£¬Ö§³ÖÖØ¸´½¨±í */
+    seq_destroy(list);  /* å…ˆæ¸…ç©ºï¼Œæ”¯æŒé‡å¤å»ºè¡¨ */
     if (n <= 0) {
         return;
     }
@@ -58,7 +58,7 @@ void seq_build(SeqList* list, const Student* data, int n) {
     list->capacity = n;
     list->size = n;
     for (i = 0; i < n; ++i) {
-        list->data[i] = data[i];  /* ÕûÌå¿½±´£¬O(n) */
+        list->data[i] = data[i];  /* æ•´ä½“æ‹·è´ï¼ŒO(n) */
     }
 }
 
@@ -78,7 +78,7 @@ int seq_insert_at(SeqList* list, int pos, const Student* stu) {
         return 0;
     }
     seq_ensure_capacity(list, list->size + 1);
-    for (i = list->size; i > pos; --i) {  /* ´ÓºóÍùÇ°°áÒÆ£¬¸ø pos ¿Õ³öÎ»ÖÃ */
+    for (i = list->size; i > pos; --i) {  /* ä»åå¾€å‰æ¬ç§»ï¼Œç»™ pos ç©ºå‡ºä½ç½® */
         list->data[i] = list->data[i - 1];
     }
     list->data[pos] = *stu;
@@ -91,7 +91,7 @@ int seq_remove_at(SeqList* list, int pos) {
     if (pos < 0 || pos >= list->size) {
         return 0;
     }
-    for (i = pos; i < list->size - 1; ++i) {  /* ºóĞøÔªËØÕûÌåÇ°ÒÆÒ»Î» */
+    for (i = pos; i < list->size - 1; ++i) {  /* åç»­å…ƒç´ æ•´ä½“å‰ç§»ä¸€ä½ */
         list->data[i] = list->data[i + 1];
     }
     --list->size;
@@ -102,7 +102,7 @@ int seq_size(const SeqList* list) {
     return list->size;
 }
 
-/* ---- Í³Ò»½Ó¿ÚÊÊÅä²ã£º°Ñ¾ßÌåº¯Êı×°½øº¯ÊıÖ¸Õë±í ---- */
+/* ---- ç»Ÿä¸€æ¥å£é€‚é…å±‚ï¼šæŠŠå…·ä½“å‡½æ•°è£…è¿›å‡½æ•°æŒ‡é’ˆè¡¨ ---- */
 
 static void seq_ops_build(void* self, const Student* data, int n) {
     seq_build((SeqList*)self, data, n);
